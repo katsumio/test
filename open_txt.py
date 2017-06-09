@@ -5,9 +5,9 @@
 # readlines()メソッド：複数行の読み込み
 # strip()メソッド：改行コードを取り除く
 #
-# バックスラッシュの入力方法：option + ¥
+# バックスラッシュの入力方法（Mac）：option + ¥
 # Create 2017/06/08
-# update 2017/06/08
+# update 2017/06/09
 # Auther Katsumi.Oshiro
 
 # sample.txtが存在しない場合は、自動的に新規作成される。
@@ -23,7 +23,7 @@ f.flush()
 f.close()
 
 #
-# sample.txtを読み込みprintする
+print ('ー読み込み例（１）ーreadlines()メソッドによる読み込み')
 #
 r = open('sample.txt','r')      # 'r'：読み込みモード
 sentence_list = r.readlines()
@@ -31,4 +31,19 @@ r.close()
 
 for sentence in sentence_list:
     print(sentence)
-    print(sentence.strip())
+#
+print ('ー読み込み例（２）ーstrip()メソッドによる改行コードの取り除き')
+#
+r = open('sample.txt','r')      # 'r'：読み込みモード
+sentence_list = r.readlines()
+r.close()
+
+for sentence in sentence_list:
+    print(sentence.strip())     # strip()：改行コードを取り除く
+#
+print ('ー読み込み例（３）ー実は最も簡単な読み込み')
+#
+r = open('sample.txt','r')      # 'r'：読み込みモード
+for line in r:
+    print(line.strip())
+r.close()
