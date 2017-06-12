@@ -25,11 +25,12 @@ print(csv_data.shape)                       # (行数,列数)
 
 csv_data = csv_data.sort_values(by=["YYKYMD"])   # pandasでソート
 
+print(csv_data.loc[(csv_data["YYKYMD"] > 20170709)])
 #csv_data[csv_data.YYKYMD > 20170709]
 #csv_data['YYKYMD'] >= 20170710
 #print(csv_data)
 
-# csvでの書き出し
-csv_data.to_csv('../data/yyk2.csv')
+# csvでの書き出し（インデックスは保存したくない場合：index=False）
+csv_data.to_csv('../data/yyk2.csv', index=False)
 #df[csv_data.YYKYMD > 20170709]
 #df.to_csv('../data/yyk2.csv')
