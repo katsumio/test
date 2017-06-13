@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pandasでCSVファイルの書き込みと読み込み
+# pandas（Python用データ分析モジュール）でCSVファイルの読み込みと書き込み
 #
 # read_csv()メソッド：csvファイルをロードする関数
 # with構文（with ファイル読み込み as 変数）：close文がいらない
