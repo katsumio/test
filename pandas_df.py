@@ -9,29 +9,34 @@
 # Auther Katsumi.Oshiro
 
 import pandas as pd                          # pandasモジュールの読み込み
+import datetime                              # datetimeモジュールの読み込み
+
+today = datetime.date.today()
+print (today)
+first_month = datetime.date(day=1, month=today.month, year=today.year)
+print (first_month)
+
+# 10行だけ表示するおまじない
+pd.options.display.max_rows = 10
 
 # pandasのread_csvでファイルを読み込む
 # そのまま read_csv とすると1行目を header として認識する
 # ヘッダがない場合は header=None とする
-#f3 = '%Y%m%d'
-#my_parser = lambda date: pd.datetime.strptime(date, f3)
-#df3 = pd.read_csv('../data/yyk.csv', encoding='euc_jp', parse_dates='YYKYMD', date_parser=my_parser)
-#df3.head()
-df = pd.read_csv('../data/yyk.csv', encoding='euc_jp', parse_dates=[3])
+# pandasでデータを読み場合、dtypeを指定した方が安全（dtypeを指定しないと勝手に型を判別）
+# とりあえず最初は全てobjectで読み込む
+df = pd.read_csv('../data/yyk.csv', encoding='euc_jp', parse_dates=[3], dtype = 'object')
 df = df.dropna(subset=['YYKYMD'])                       # 欠損値は削除
 
-print(df [['YYKYMD', 'KEYYYKTIME']])                # 列の選択
+#print(df [['YYKYMD', 'KEYYYKTIME']])                # 列の選択
 #print(df.groupby('YYKYMD')['KEYYYKTIME'].mean())    # グループ化、集約（平均）
 
-#print(dates_pd)
+# 検索条件：予約年月日'YYKYMD' >= today and 予約件数'YYKCNT' > '000' and 予約時間'YYKTIME' == '0000'
+df = df[(df['YYKYMD'] >= first_month) & (df['YYKCNT'] > '000') & (df['YYKTIME'] == '0000')]
 
-#pd.to_datetime(['YYKYMD'], format='%Y%m%d')
+#df = df[df['YYKCNT'] > '000']
 
-#print(pd.to_datetime(['YYKYMD'], format='%Y%m%d'))
-
-#df = df.sort_values(by=["YYKYMD"])   # pandasでソート
-
-#print(df.loc[(csv_data["YYKYMD"] > 20170709)])
+df = df.sort_values(by=["YYKYMD", "KEYYYKTIME"])   # pandasでソート
+print(df)
 
 # csvでの書き出し（インデックスは保存したくない場合：index=False）
-#df.to_csv('../data/yyk2.csv', index=False)
+df.to_csv('../data/yyk2.csv', index=False)
