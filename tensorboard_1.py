@@ -21,7 +21,7 @@ with tf.name_scope('division_scope'):
 
 with tf.Session() as sess:
 	with tf.name_scope('init_scope'):
-		sess.run(tf.initialize_all_variables())
+		sess.run(tf.global_variables_initializer())
 	sess.run(zz)
 	# SummaryWriterで計算グラフを書く
 	summary_writer = tf.summary.FileWriter('data', graph=sess.graph)
