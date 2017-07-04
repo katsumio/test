@@ -11,9 +11,9 @@
 # update 2017/06/30
 # Auther Katsumi.Oshiro
 
-import csv                          # csvモジュールの読み込み
-
-import glob                         # globモジュールの読み込み
+import csv                  # csvモジュールの読み込み（CSVファイルの読み書き）
+import glob                 # globモジュールの読み込み（ファイル名のパターンマッチング）
+import pandas as pd         # pandasモジュールの読み込み
 
 # 辞書（患者ID、生年月日）を初期化
 birth = {}
@@ -24,29 +24,31 @@ with open('../data/name.csv', 'r')as f:
         print(row[0],row[1],row[2],row[3])
         birth.update({row[0]:row[3]})
 
+# 辞書(birth)：生年月日の検索テスト（患者ID:679）
 print(birth["679"])
 
-'''
-dict = {}
-for row2 in kanjya:
-    print(row2)
-    dict.update({row2[0]:row2[3]})
-f.close()
-'''
+# 年齢計算テスト（患者ID:679）
+today = int(pd.to_datetime('today').strftime('%Y%m%d'))
+birthday = int(pd.to_datetime(birth["679"]).strftime('%Y%m%d'))
+print(int((today - birthday)/ 10000))
 
 # フォルダ内の血液検査ファイル名の取得（ワイルドカードが使用可能）
-txt_file = glob.glob('../data/labo/(BP)*.txt')
-# print(txt_file)
-# for file in txt_file:
-#     print(file)
+txt_file = glob.glob('../data/labo/*.txt')
 
-'''
-with open("../data/labo/TCHO-P.txt", "w") as f:
+# 検査結果の出力
+# 元データ：low[0]生年月日,low[1]患者ID,low[2]氏名,low[3]性別,low[5]検査項目名,low[10]結果値）
+with open("../data/labo/TCHO-P.csv", "w") as f:
     for file_name in txt_file:
-        with open(file_name, 'r')as target_file:
-            for line in open(file_name, "r"):
-                if line[0:6] == "TCHO-P":
-                    f.write(line)
-                    print(line)
-
-'''
+        with open(file_name, 'r')as f2:
+            reader = csv.reader(f2)
+            for low in reader:
+                if low[5] == "TCHO-P":
+                    writer = csv.writer(f, lineterminator='\n')
+                    listdata = []
+                    listdata.append(low[1])
+                    today = int(pd.to_datetime(low[0]).strftime('%Y%m%d'))
+                    birthday = int(pd.to_datetime(birth[low[1]]).strftime('%Y%m%d'))
+                    listdata.append(int((today - birthday)/ 10000))
+                    listdata.append(low[10])
+                    listdata.append('')
+                    writer.writerow(listdata)
