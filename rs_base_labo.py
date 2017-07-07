@@ -1,54 +1,70 @@
 # -*- coding: utf-8 -*-
-# txtãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã¨èª­ã¿è¾¼ã¿
+# txtƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚Æ“Ç‚İ‚İ
 #
-# å¤‰æ•°å = open(ãƒ•ã‚¡ã‚¤ãƒ«å,ãƒ¢ãƒ¼ãƒ‰)
-# withæ§‹æ–‡ï¼ˆwith ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ as å¤‰æ•°ï¼‰ï¼šcloseæ–‡ãŒã„ã‚‰ãªã„
-# for å¤‰æ•° in ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ:
-#     å®Ÿè¡Œã™ã‚‹å‡¦ç†
-# ã‚¹ãƒ©ã‚¤ã‚¹ã‚’ä½¿ã£ãŸéƒ¨åˆ†æ–‡å­—åˆ—ã®å–å¾— [0:6]
+# •Ï”–¼ = open(ƒtƒ@ƒCƒ‹–¼,ƒ‚[ƒh)
+# with\•¶iwith ƒtƒ@ƒCƒ‹“Ç‚İ‚İ as •Ï”jFclose•¶‚ª‚¢‚ç‚È‚¢
+# for •Ï” in ƒIƒuƒWƒFƒNƒg:
+#     Às‚·‚éˆ—
+# ƒXƒ‰ƒCƒX‚ğg‚Á‚½•”•ª•¶š—ñ‚Ìæ“¾ [0:6]
 #
 # Create 2017/06/30
 # update 2017/06/30
 # Auther Katsumi.Oshiro
 
-import csv                  # csvãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿ï¼ˆCSVãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿æ›¸ãï¼‰
-import glob                 # globãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«åã®ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒãƒƒãƒãƒ³ã‚°ï¼‰
-import pandas as pd         # pandasãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿
+import csv                  # csvƒ‚ƒWƒ…[ƒ‹‚Ì“Ç‚İ‚İiCSVƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‘‚«j
+import glob                 # globƒ‚ƒWƒ…[ƒ‹‚Ì“Ç‚İ‚İiƒtƒ@ƒCƒ‹–¼‚Ìƒpƒ^[ƒ“ƒ}ƒbƒ`ƒ“ƒOj
+import pandas as pd         # pandasƒ‚ƒWƒ…[ƒ‹‚Ì“Ç‚İ‚İ
 
-# è¾æ›¸ï¼ˆæ‚£è€…IDã€ç”Ÿå¹´æœˆæ—¥ï¼‰ã‚’åˆæœŸåŒ–
+print('RS_BaseŒŒ‰tŒŸ¸CSVƒf[ƒ^‚ÌæiSTARTj')
+# «‘iŠ³ÒIDA¶”NŒ“új‚ğ‰Šú‰»
 birth = {}
-# æ‚£è€…ãƒã‚¹ã‚¿ãƒ¼ï¼ˆname.csvï¼‰ã®èª­ã¿è¾¼ã¿
+# Š³Òƒ}ƒXƒ^[iname.csvj‚Ì“Ç‚İ‚İ
 with open('../data/name.csv', 'r')as f:
     reader = csv.reader(f)
     for row in reader:
-        print(row[0],row[1],row[2],row[3])
+#       print(row[0],row[1],row[2],row[3])
         birth.update({row[0]:row[3]})
 
-# è¾æ›¸(birth)ï¼šç”Ÿå¹´æœˆæ—¥ã®æ¤œç´¢ãƒ†ã‚¹ãƒˆï¼ˆæ‚£è€…ID:679ï¼‰
-print(birth["679"])
+# «‘(birth)F¶”NŒ“ú‚ÌŒŸõƒeƒXƒgiŠ³ÒID:679j
+print('Š³ÒID:679‚Ì¶”NŒ“ú->', birth["679"])
 
-# å¹´é½¢è¨ˆç®—ãƒ†ã‚¹ãƒˆï¼ˆæ‚£è€…ID:679ï¼‰
+# ”N—îŒvZƒeƒXƒgiŠ³ÒID:679j
 today = int(pd.to_datetime('today').strftime('%Y%m%d'))
 birthday = int(pd.to_datetime(birth["679"]).strftime('%Y%m%d'))
-print(int((today - birthday)/ 10000))
+print('Š³ÒID:697‚Ì”N—î->', int((today - birthday)/ 10000))
 
-# ãƒ•ã‚©ãƒ«ãƒ€å†…ã®è¡€æ¶²æ¤œæŸ»ãƒ•ã‚¡ã‚¤ãƒ«åã®å–å¾—ï¼ˆãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ãŒä½¿ç”¨å¯èƒ½ï¼‰
+# ƒtƒHƒ‹ƒ_“à‚ÌŒŒ‰tŒŸ¸ƒtƒ@ƒCƒ‹–¼‚Ìæ“¾iƒƒCƒ‹ƒhƒJ[ƒh‚ªg—p‰Â”\j
 txt_file = glob.glob('../data/labo/*.txt')
 
-# æ¤œæŸ»çµæœã®å‡ºåŠ›
-# å…ƒãƒ‡ãƒ¼ã‚¿ï¼šlow[0]ç”Ÿå¹´æœˆæ—¥,low[1]æ‚£è€…ID,low[2]æ°å,low[3]æ€§åˆ¥,low[5]æ¤œæŸ»é …ç›®å,low[10]çµæœå€¤ï¼‰
-with open("../data/labo/TCHO-P.csv", "w") as f:
+# ŒŸ¸Œ‹‰Ê‚Ìo—Í
+# Œ³ƒf[ƒ^Flow[0]¶”NŒ“ú,low[1]Š³ÒID,low[2]–¼,low[3]«•Ê,low[5]ŒŸ¸€–Ú–¼,low[6]”»’è,low[10]Œ‹‰Ê’lj
+with open("../data/labo/GLU-P.csv", "w") as f:
     for file_name in txt_file:
         with open(file_name, 'r')as f2:
             reader = csv.reader(f2)
             for low in reader:
-                if low[5] == "TCHO-P":
+                if low[5] == "GLU-P":
                     writer = csv.writer(f, lineterminator='\n')
                     listdata = []
                     listdata.append(low[1])
                     today = int(pd.to_datetime(low[0]).strftime('%Y%m%d'))
                     birthday = int(pd.to_datetime(birth[low[1]]).strftime('%Y%m%d'))
                     listdata.append(int((today - birthday)/ 10000))
-                    listdata.append(low[10])
+                    if low[1] == "679":
+                        listdata.append('')
+                        listdata.append('')
+                        listdata.append('')
+                        listdata.append(low[10])
+                    elif low[6] == "H":
+                        listdata.append('')
+                        listdata.append('')
+                        listdata.append(low[10])
+                    elif low[6] == "L":
+                        listdata.append('')
+                        listdata.append(low[10])
+                    else:
+                        listdata.append(low[10])
                     listdata.append('')
                     writer.writerow(listdata)
+
+print('RS_BaseŒŒ‰tŒŸ¸CSVƒf[ƒ^‚ÌæiENDj')
