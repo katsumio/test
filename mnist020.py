@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # (ハッシュマーク)コメントアウト記号
+# プログラミングの第一歩は"Hello World"を出力することですが
+# 機械学習では"MNIST"(エムニスト)「手書き文字データ」です
+#
 # TensorBoard入門（計算グラフを書く）
 #
 # sess.run(tf.global_variables_initializer())
