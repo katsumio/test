@@ -1,44 +1,61 @@
-# -*- coding: shift_jis -*-
-# RS_Base_laboƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚Æ“Ç‚İ‚İ
+# -*- coding: utf-8 -*-
+# æ¤œä½“æ¤œæŸ»çµæœãƒ‡ãƒ¼ã‚¿ï¼ˆæ‚£è€…ã”ã¨ï¼‰ã®èª­ã¿è¾¼ã¿ã¨æ¤œä½“æ¤œæŸ»çµæœãƒ‡ãƒ¼ã‚¿ï¼ˆæ¤œæŸ»é …ç›®ã”ã¨ï¼‰ã®å‡ºåŠ›
+# â””â†’RS_Base_laboãƒ•ã‚¡ã‚¤ãƒ«
 #
-# •Ï”–¼ = open(ƒtƒ@ƒCƒ‹–¼,ƒ‚[ƒh)
-# with\•¶iwith ƒtƒ@ƒCƒ‹“Ç‚İ‚İ as •Ï”jFclose•¶‚ª‚¢‚ç‚È‚¢
-# for •Ï” in ƒIƒuƒWƒFƒNƒg:
-#     Às‚·‚éˆ—
-# ƒXƒ‰ƒCƒX‚ğg‚Á‚½•”•ª•¶š—ñ‚Ìæ“¾ [0:6]
+# å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«
+# â””â†’æ‚£è€…ãƒã‚¹ã‚¿ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã€€ã€€ã€€ï¼šname.csv
+# â””â†’æ¤œä½“æ¤œæŸ»çµæœãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«ï¼šæ‚£è€…ID.txtï¼ˆä¾‹ï¼š101.txt,102.txt,103.txtãƒ»ãƒ»ãƒ»ï¼‰
 #
-# Create 2017/06/30 : Update 2017/07/07
+# Create 2017/07/09 : Update 2017/07/09
 # Auther Katsumi.Oshiro
 
-import csv                  # csvƒ‚ƒWƒ…[ƒ‹‚Ì“Ç‚İ‚İiCSVƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‘‚«j
-import glob                 # globƒ‚ƒWƒ…[ƒ‹‚Ì“Ç‚İ‚İiƒtƒ@ƒCƒ‹–¼‚Ìƒpƒ^[ƒ“ƒ}ƒbƒ`ƒ“ƒOj
-import pandas as pd         # pandasƒ‚ƒWƒ…[ƒ‹‚Ì“Ç‚İ‚İ
+import csv                  # csvãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿ï¼ˆCSVãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿æ›¸ãï¼‰
+import glob                 # globãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«åã®ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒãƒƒãƒãƒ³ã‚°ï¼‰
+import pandas as pd         # pandasãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿
+import os                   # osãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®èª­ã¿è¾¼ã¿
 
-print('RS_Base_laboƒf[ƒ^‚Ì“Ç‚İ‚İiSTARTj')
-# «‘iŠ³ÒIDA¶”NŒ“új‚ğ‰Šú‰»
+print('# RS_Base_laboãƒ‡ãƒ¼ã‚¿ã«ã‚ˆã‚‹æ¤œä½“æ¤œæŸ»ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆï¼ˆSTARTï¼‰')
+# è¾æ›¸ï¼ˆæ‚£è€…IDã€ç”Ÿå¹´æœˆæ—¥ï¼‰ã®ä½œæˆ
 birth = {}
-# Š³Òƒ}ƒXƒ^[iname.csvj‚Ì“Ç‚İ‚İ
+# æ‚£è€…ãƒã‚¹ã‚¿ãƒ¼ï¼ˆname.csvï¼‰ã®èª­ã¿è¾¼ã¿
+count = 0
 with open('../data/name.csv', 'r')as f:
     reader = csv.reader(f)
     for row in reader:
 #       print(row[0],row[1],row[2],row[3])
         birth.update({row[0]:row[3]})
+        count += 1
+print('# æ‚£è€…ãƒã‚¹ã‚¿ãƒ¼èª­ã¿è¾¼ã¿ä»¶æ•°--------->', count)
 
-# «‘(birth)F¶”NŒ“ú‚ÌŒŸõƒeƒXƒgiŠ³ÒID:679j
-print('«‘ƒeƒXƒgFŠ³ÒID:679‚Ì¶”NŒ“ú->', birth["679"])
+# è¾æ›¸(birth)ï¼šç”Ÿå¹´æœˆæ—¥ã®æ¤œç´¢ãƒ†ã‚¹ãƒˆï¼ˆæ‚£è€…ID:679ï¼‰
+print('# è¾æ›¸ãƒ†ã‚¹ãƒˆï¼šæ‚£è€…ID:679ã®ç”Ÿå¹´æœˆæ—¥->', birth["679"])
 
-# ”N—îŒvZƒeƒXƒgiŠ³ÒID:679j
+# å¹´é½¢è¨ˆç®—ãƒ†ã‚¹ãƒˆï¼ˆæ‚£è€…ID:679ï¼‰
 today = int(pd.to_datetime('today').strftime('%Y%m%d'))
 birthday = int(pd.to_datetime(birth["679"]).strftime('%Y%m%d'))
-print('”N—îƒeƒXƒgFŠ³ÒID:697‚Ì”N—î----->', int((today - birthday)/ 10000))
+print('# å¹´é½¢ãƒ†ã‚¹ãƒˆï¼šæ‚£è€…ID:697ã®å¹´é½¢----->', int((today - birthday)/ 10000))
 
-# ƒtƒHƒ‹ƒ_“à‚ÌŒŒ‰tŒŸ¸ƒtƒ@ƒCƒ‹–¼‚Ìæ“¾iƒƒCƒ‹ƒhƒJ[ƒh‚ªg—p‰Â”\j
+# ãƒ•ã‚©ãƒ«ãƒ€å†…ã®æ¤œä½“æ¤œæŸ»ãƒ•ã‚¡ã‚¤ãƒ«åã®å–å¾—ï¼ˆãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ãŒä½¿ç”¨å¯èƒ½ï¼‰
 txt_file = glob.glob('../data/labo/*.txt')
 
-blood = input('ŒŒ‰tŒŸ¸–¼‚ğ“ü—Í‚µ‚Ä‰º‚³‚¢F')
-# ŒŸ¸Œ‹‰Ê‚Ìo—Í
-# Œ³ƒf[ƒ^Flow[0]¶”NŒ“ú,low[1]Š³ÒID,low[2]–¼,low[3]«•Ê,low[5]ŒŸ¸€–Ú–¼,low[6]”»’è,low[10]Œ‹‰Ê’lj
+blood = input('# æ¤œä½“æ¤œæŸ»åã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ï¼š')
+
+count = 0
+# æ¤œä½“æ¤œæŸ»çµæœãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆæ¤œæŸ»é …ç›®ã”ã¨ï¼‰ã®ä½œæˆ
+# å…ƒãƒ‡ãƒ¼ã‚¿ï¼šlow[0]ç”Ÿå¹´æœˆæ—¥,low[1]æ‚£è€…ID,low[2]æ°å,low[3]æ€§åˆ¥,low[5]æ¤œæŸ»é …ç›®å,low[6]åˆ¤å®š,low[10]çµæœå€¤ï¼‰
 with open("../data/labo/" + blood + ".csv", "w") as f:
+    writer = csv.writer(f, lineterminator='\n')
+    header = []
+    header.append('æ‚£è€…ID')
+    header.append('å¹´é½¢')
+    header.append('åŸºæº–å€¤ï¼ˆç”·ï¼‰')
+    header.append('åŸºæº–å€¤ï¼ˆå¥³ï¼‰')
+    header.append('åŸºæº–å€¤ä»¥ä¸‹ï¼ˆç”·ï¼‰')
+    header.append('åŸºæº–å€¤ä»¥ä¸‹ï¼ˆå¥³ï¼‰')
+    header.append('åŸºæº–å€¤ä»¥ä¸Šï¼ˆç”·ï¼‰')
+    header.append('åŸºæº–å€¤ä»¥ä¸Šï¼ˆå¥³ï¼‰')
+    header.append('ç§')
+    writer.writerow(header)
     for file_name in txt_file:
         with open(file_name, 'r')as f2:
             reader = csv.reader(f2)
@@ -59,7 +76,7 @@ with open("../data/labo/" + blood + ".csv", "w") as f:
                         listdata.append('')
                         listdata.append(low[10])
                     elif low[6] == "H":
-                        if low[3] == "’j«":
+                        if low[3] == "ç”·æ€§":
                             listdata.append('')
                             listdata.append('')
                             listdata.append('')
@@ -73,7 +90,7 @@ with open("../data/labo/" + blood + ".csv", "w") as f:
                             listdata.append('')
                             listdata.append(low[10])
                     elif low[6] == "L":
-                        if low[3]  == "’j«":
+                        if low[3]  == "ç”·æ€§":
                             listdata.append('')
                             listdata.append('')
                             listdata.append(low[10])
@@ -83,13 +100,18 @@ with open("../data/labo/" + blood + ".csv", "w") as f:
                             listdata.append('')
                             listdata.append(low[10])
                     else:
-                        if low[3] == "’j«":
+                        if low[3] == "ç”·æ€§":
                             listdata.append(low[10])
                         else:
                             listdata.append('')
                             listdata.append(low[10])
                     listdata.append('')
                     writer.writerow(listdata)
+                    count += 1
 
-print(blood + '.csv ƒtƒ@ƒCƒ‹‚ğì¬‚µ‚Ü‚µ‚½')
-print('RS_Base_laboƒf[ƒ^‚Ì“Ç‚İ‚İiENDj')
+print('# æ¤œä½“æ¤œæŸ»ãƒ‡ãƒ¼ã‚¿å‡ºåŠ›ä»¶æ•°----------->', count)
+if count == 0:
+    os.remove("../data/labo/" + blood + ".csv")
+else:
+    print('# ' + blood + '.csv ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ã¾ã—ãŸ')
+print('# RS_Base_laboãƒ‡ãƒ¼ã‚¿ã«ã‚ˆã‚‹æ¤œä½“æ¤œæŸ»ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆï¼ˆENDï¼‰')
