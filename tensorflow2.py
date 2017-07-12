@@ -41,14 +41,31 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
+# summaryの設定
+# ある値を可視化したいときはサマリーと呼ばれるデータをログファイルに書き出します
+# 可視化したい値がスカラー値の場合はtf.summary.scalarという関数でスカラー値をサマリーに追加
+# 'cross_entropy'という名前のグラフをlossという変数の値で作成
+tf.summary.scalar('cross_entropy', loss)
+summary_op = tf.summary.merge_all()
+summary_writer = tf.summary.FileWriter('data', graph=sess.graph)
+
 # iteration回数を200回として、予めtrainに設定したコスト関数の最小化処理を繰り返し実行
 # 20stepずつ、コンソールへの出力を行い、状況を確認
 for step in range(201):
 	sess.run(train)
+# SummaryWriterで計算グラフを書く
+#	summary_writer = tf.summary.FileWriter('data', graph=sess.graph)
+#	tf.summary.scalar('one_plus_one_summary', train)
+# stepが20の倍数の時だけ表示する
 	if step % 20 == 0:
+		summary_writer.add_summary(summary, step)
+#		summary_str = sess.run(summary_op, feed_dict=dict_data)
+#		summary_writer.add_summary(summary_str, step)
+#		summary_writer.flush()
 		print(step, sess.run(w), sess.run(b))
 
 sess.close
+
 
 '''
 with tf.name_scope('add_scope'):
