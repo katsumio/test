@@ -1,7 +1,8 @@
 '''
 TensorFlowの可視化ツール（TensorBoard）の使い方
 Python v3.6.1 : TensorFlow v1.1.0
-
+（２クラス）ロジスティック回帰モデル
+　 →被説明変数が「買った」「買っていない」か、すなわち「0-1」になるような場合に用いられる
 ・TensorBoardの起動
 　　tensorboard --logdir=log
 ・TensorBoardのWeb画面にアクセス
@@ -27,13 +28,15 @@ if os.path.exists(LOG_DIR) is False:
 '''
 データの生成（numpyの配列）
 '''
-# ORゲート
+# ORゲート（論理和）
 X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 Y = np.array([[0], [1], [1], [1]])
 
 '''
 モデル設定
 '''
+# ロジスティック回帰のパラメータ：重み'w'とバイアス'b'（ y = σ(wx + b) ）
+# 入力：2次元 出力：1次元
 w = tf.Variable(tf.zeros([2, 1]), name='w')
 b = tf.Variable(tf.zeros([1]), name='b')
 
