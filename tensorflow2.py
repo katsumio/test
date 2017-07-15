@@ -7,7 +7,7 @@
 # →浮動小数点数　　：float16：16ビット、float32：32ビット、float64：64ビット
 #
 # Create 2017/07/11
-# update 2017/07/11
+# update 2017/07/15
 # Auther Katsumi.Oshiro
 
 import tensorflow as tf
@@ -56,7 +56,7 @@ for step in range(201):
 # SummaryWriterで計算グラフを書く
 #	summary_writer = tf.summary.FileWriter('data', graph=sess.graph)
 #	tf.summary.scalar('one_plus_one_summary', train)
-# stepが20の倍数の時だけ表示する
+# stepが20の倍数の時だけ表示する（剰余計算：左辺を右辺で割った余り）
 	if step % 20 == 0:
 		summary_writer.add_summary(summary, step)
 #		summary_str = sess.run(summary_op, feed_dict=dict_data)
