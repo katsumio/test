@@ -7,7 +7,7 @@ Python v3.6.1 : TensorFlow v1.1.0
 　　tensorboard --logdir=log
 ・TensorBoardのWeb画面にアクセス
 　　http://localhost:6006
-Create 2017/07/13 : Update 2017/07/15 : Auther Katsumi.Oshiro
+Create 2017/07/13 : Update 2017/07/16 : Auther Katsumi.Oshiro
 '''
 
 import os
@@ -93,6 +93,8 @@ for epoch in range(200):
         x: X,
         t: Y
     })
+    print('x= \n', x)
+    print('t= \n', t)
 
     summary, loss = sess.run([summaries, cross_entropy], feed_dict={
         x: X,
